@@ -1,13 +1,17 @@
+Markdown
+
+# Contributing to AI Project Ideas 🚀
+
 Hey there! First off, thanks for even thinking about contributing — it really means a lot. Whether you're fixing a tiny typo or adding a whole new feature, every bit helps. Let's get you set up.
 
-How to Contribute
-1. Fork the repository
+## How to Contribute
+
+### 1. Fork the repository
 Hit that "Fork" button at the top right of this repo. Easy.
 
-2. Clone your fork locally
+### 2. Clone your fork locally
 
-Bash
-
+```bash
 git clone https://github.com/your-username/ai-project-ideas.git
 cd ai-project-ideas
 3. Create a new branch
@@ -26,7 +30,6 @@ Bash
 
 git commit -m "feat: add your feature"
 6. Push it up
-
 Bash
 
 git push origin feat/your-feature-name
