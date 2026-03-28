@@ -1,6 +1,3 @@
-Markdown
-
-# Contributing to AI Project Ideas 🚀
 
 Hey there! First off, thanks for even thinking about contributing — it really means a lot. Whether you're fixing a tiny typo or adding a whole new feature, every bit helps. Let's get you set up.
 
