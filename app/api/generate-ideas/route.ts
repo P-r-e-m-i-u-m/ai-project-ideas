@@ -9,23 +9,8 @@ export async function POST(req: NextRequest) {
   try {
     const body: GenerateIdeasRequest = await req.json()
 
-    // Validate input
-    if (!body.topic || body.topic.trim().length < 2) {
-      return NextResponse.json(
-        { error: "Topic must be at least 2 characters" },
-        { status: 400 }
-      )
-    }
-
-    if (!body.count || body.count < 1 || body.count > 10) {
-      return NextResponse.json(
-        { error: "Count must be between 1 and 10" },
-        { status: 400 }
-      )
-    }
-
-    // Check API key is configured
     const provider = process.env.AI_PROVIDER || "openai"
+
     const hasKey =
       (provider === "openai" && process.env.OPENAI_API_KEY) ||
       (provider === "anthropic" && process.env.ANTHROPIC_API_KEY) ||
@@ -34,7 +19,11 @@ export async function POST(req: NextRequest) {
     if (!hasKey) {
       return NextResponse.json(
         {
-          error: `No API key found for provider "${provider}". Please add your key to .env.local`,
+          error: `No API key found for provider "${provider}"`,
+          debug: {
+            provider,
+            openai: process.env.OPENAI_API_KEY,
+          },
         },
         { status: 500 }
       )
@@ -57,7 +46,11 @@ export async function POST(req: NextRequest) {
           { status: 401 }
         )
       }
-      if (error.message.includes("rate limit") || error.message.includes("429")) {
+
+      if (
+        error.message.includes("rate limit") ||
+        error.message.includes("429")
+      ) {
         return NextResponse.json(
           { error: "Rate limit hit. Please wait a moment and try again." },
           { status: 429 }
