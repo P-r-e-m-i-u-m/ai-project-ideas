@@ -29,7 +29,18 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const ideas = await generateIdeas(body)
+    let ideas
+
+try {
+  ideas = await generateIdeas(body)
+} catch (err) {
+  console.error("AI GENERATION ERROR:", err)
+
+  return NextResponse.json(
+    { error: "AI generation failed (check API / model / baseURL)" },
+    { status: 500 }
+  )
+}
 
     return NextResponse.json({
       ideas,
